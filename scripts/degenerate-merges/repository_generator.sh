@@ -25,6 +25,21 @@ if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
 else
     echo "Inicializando nuevo repositorio Git..."
     git init
+
+# 6. Creacion de commits de ejemplo
+    echo '= Documentacion' > README.adoc
+    git add README.adoc
+    git commit -m 'Commit inicial'
+    echo -e "\n== Commit uno main" >> README.adoc
+    git commit README.adoc -m 'Cambio uno main'
+    git checkout -b rama-a
+    echo -e "\n== Cambio uno rama-a" >> README.adoc
+    git commit README.adoc -m 'Cambio uno rama-a'
+    echo -e "\n== Cambio dos rama-a" >> README.adoc
+    git commit README.adoc -m 'Cambio dos rama-a'
+    git checkout main
+    git merge rama-a
+    git merge rama-a
 fi
 
 echo "Listo. Te encuentras en: $(pwd)"
