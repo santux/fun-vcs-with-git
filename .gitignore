@@ -27,3 +27,4 @@ Thumbs.db # Windows
 # Build dependencies (if using a build tool like Maven, Gradle, or npm)
 /target/ # Maven/Gradle output
 /node_modules/ # npm dependencies
+todo.adoc
