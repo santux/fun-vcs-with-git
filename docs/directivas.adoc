@@ -1,0 +1,7 @@
+:toc: right
+:toc-title: Índice
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:sectlinks:
+:icons: font

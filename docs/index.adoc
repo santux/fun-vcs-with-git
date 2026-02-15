@@ -1,0 +1,14 @@
+= fun-vcs-with-git
+J. de los Santos <iadevelppment@gmail.com>
+include::directivas.adoc[]
+
+== Learning version control with Git
+
+include::capitulos/chapter-seis-merges.adoc[]
+
+
+[appendix]
+include::apendices/guidelines.adoc[]
+
+[appendix]
+include::apendices/git-commands.adoc[]
