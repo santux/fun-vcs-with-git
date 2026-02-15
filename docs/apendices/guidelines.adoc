@@ -1,0 +1,14 @@
+== Lineamientos (Guidelines)
+
+=== Archivos
+
+Nombrado de archivos
+
+Guion medio vs guion bajo: en el nombre de archivos y/o carpetas
+
+* Guion bajo es el standar y prefefible para lenguajes de scripting
+* Guion medio es el standar en el desarrollo web (npm, apt)
+    ** Guien medio es el estandar para URLs
+
+* Nunca espacio en blanco oblica autilizar comillas
+* CamelCase falla en entornos que nos distinguen mayusculas de minisculas

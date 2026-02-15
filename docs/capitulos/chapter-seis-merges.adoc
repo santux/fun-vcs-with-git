@@ -1,0 +1,5 @@
+== Merges
+
+=== Merges Strategies
+
+==== Degenerate Merges
