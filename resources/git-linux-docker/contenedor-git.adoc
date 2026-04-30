@@ -1,14 +1,15 @@
 = Contenedor Git
 
-Este documento prentende explicar la creacion de una `*imagen docker*` apartir de la cual se puedan crear `*contenedores*` pre-configurados con las herramientas minimas necesarias para poder funcionar como laboratorios de git.
+[.text-justify]
+Este documento prentende ayudarte a crear una `*imagen docker*` apartir de la cual se pueden tener `*contenedores*` pre-configurados con las herramientas minimas necesarias para poder funcionar como laboratorios de git. No importa si eres un usuario experto, avanzado o totalmente nuevo seguramente te sera de utilidad, ademas de aislar completamente tus pruebas sin correr el riesgo sobrescribir configuraciones de tu espacio de trabajo (`workspace`)
 
 == Creación de la imagen personalizada.
 
 * Elementos necesarios:
-** Imagen base: Se eligio un `Fedora`
-** Se realiza la instalacion de Git
+** Imagen base: Se eligio `Fedora Linux`
+** Se realiza la instalación de Git
 ** Se crea un usuario sin privilegio (`no-root`)
-** Instalacion de Oh My Zsh
+** Instalación de Oh My Zsh
 ** Configuración básica git.
 *** `user.email=dummy@crashtest.com.mx`
 *** `user.name=Dummy Crash`
