@@ -1,0 +1,74 @@
+= Contenedor Git
+
+Este documento prentende explicar la creacion de una `*imagen docker*` apartir de la cual se puedan crear `*contenedores*` pre-configurados con las herramientas minimas necesarias para poder funcionar como laboratorios de git.
+
+== Creación de la imagen personalizada.
+
+* Elementos necesarios:
+** Imagen base: Se eligio un `Fedora`
+** Se realiza la instalacion de Git
+** Se crea un usuario sin privilegio (`no-root`)
+** Instalacion de Oh My Zsh
+** Configuración básica git.
+*** `user.email=dummy@crashtest.com.mx`
+*** `user.name=Dummy Crash`
+*** `init.defaultbranch=main`
+** `Dockerfile` se encuentra en la misma carpeta que este documento.
+
+====
+.Construcción de la imagen docker
+[source, bash, subs="+quotes"]
+----
+`[dummy@e40d00007a3d ~]$ docker build -t *[NOMBRE_IMAGEN]*:**[TAG]** .`     <1> <2>
+----
+<1> `*[NOMBRE_IMAGEN]*` Reemplazar el placeholder con el nombre que deseas darle a tu imagen
+<1> `*[TAG]*` Asignarle una version de tu preferencia
+====
+
+====
+.Ejemplo: generación imagen
+[source, bash, subs="+quotes"]
+----
+`[dummy@e40d00007a3d ~]$ docker build -t *fedora-git-slim:43-latest* .`     <1>
+
+[+] Building 1.4s (10/10) FINISHED                                             docker:default
+ => [internal] load build definition from Dockerfile                                     0.0s
+ => => transferring dockerfile: 798B                                                     0.0s
+ => [internal] load metadata for quay.io/fedora/fedora-minimal:latest                    0.1s
+ => [internal] load .dockerignore                                                        0.0s
+ => => transferring context: 2B                                                          0.0s
+ => [1/6] FROM quay.io/fedora/fedora-minimal:latest@sha256:dbc8735b1314efb54d            0.1s
+ => => resolve quay.io/fedora/fedora-minimal:latest@sha256:dbc8735b1314efb54d            0.1s
+ => exporting to image                                                                   1.0s
+ => => exporting layers                                                                  0.0s
+ => => exporting manifest sha256:7d86f4dbc4bfdfa6a1a7c611301643fe5bbf009433cc            0.0s
+ => => exporting config sha256:dd899c069b9756d007f44bb35c236a62eeb54ffc8f2b80            0.0s
+ => => exporting attestation manifest sha256:3102c0d051113709359db9851401d52a            0.1s
+ => => exporting manifest list sha256:061427ba181cb1256e7c52f7d3096af6fdc3385            0.0s
+ => => naming to docker.io/library/fedora-git-slim:43-latest                             0.0s
+ => => unpacking to docker.io/library/fedora-git-slim:43-latest                          0.8s
+
+`[dummy@e40d00007a3d ~]$ docker images  | grep fedora`
+fedora-git-slim:43-latest                  061427ba181c        313MB         83.9MB
+
+----
+<1> `docker build -t fedora-git-mini .` Nombrala como mejor te parezca :-)
+====
+
+====
+.Ejemplo: creacion de un contenedor
+[source, bash, subs="+quotes"]
+----
+`[santos@localhost ~]$ *docker run -it --name contenedor-git-fun fedora-git-slim:43-latest*`
+
+`dummy@2689b195dc5a ~ *git --version*`
+`git version 2.53.0`
+
+`dummy@2689b195dc5a ~ *git config --list*`
+
+`user.email=dummy@crashtest.com.mx`
+`user.name=Dummy Crash`
+`init.defaultbranch=main`
+`(END)`
+----
+====
