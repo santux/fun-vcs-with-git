@@ -10,21 +10,21 @@
 /build/
 /out/
 /generated/
-/_resources/generated/ # Specific to some AsciiDoc templates
+/_resources/generated/
 
 # General system and editor ignore patterns (recommended for all projects)
 # Operating System files
-.DS_Store # macOS
-Thumbs.db # Windows
+.DS_Store
+Thumbs.db
 
 # Common Editor/IDE files
-.idea/ # IntelliJ IDEA project files
-.vscode/ # VS Code project files
-*.swp # Vim swap files
+.idea
+.vscode
+*.swp
 .project
 .classpath
 
 # Build dependencies (if using a build tool like Maven, Gradle, or npm)
-/target/ # Maven/Gradle output
-/node_modules/ # npm dependencies
+/target/
+/node_modules/
 todo.adoc
