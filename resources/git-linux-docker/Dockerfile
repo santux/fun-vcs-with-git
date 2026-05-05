@@ -1,6 +1,8 @@
 FROM quay.io/fedora/fedora-minimal:latest
 
 RUN microdnf install -y \
+    python \
+    vim \
     git \
     zsh \
     curl \
