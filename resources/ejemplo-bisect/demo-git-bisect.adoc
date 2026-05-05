@@ -1,0 +1,83 @@
+= Demo: `git bisect`
+
+[.text-justify]
+El comando `git bisect` es una de las herraientas mas potentes que nos proporciona `git` y sin embargo es muy poco utilizada, nos ayuda a encontrar errores inyectados en algun punto en el historial de commits.
+
+[.text-justify]
+Si estas familiarizadon con el algoritmo de busqueda binaria esta herramienta hace un proceso similar al tratar de encontrar el commit defectuoso marcando un rango de commit iniciando desde el ultimo commit donde nuestra aplicacion funcionaba (`*good commit*`) correctamente hasta donde detectamos el fallo (`*bad commit*`)
+
+== Documentación: Como usar este demo?
+
+. Creamos nuestro proyecto/repositorio de trabaj: `*demo-git-bisect*`
++
+    .. Generamos un repositorio nuevo usando nuestro script: `*repository_generator.sh*`
++
+====
+[source, bash, subs="+quotes"]
+----
+`~/ruta/donde/pones/el/script/repository_generator.sh *[RUTA_REPOSITORIO]*`     <1>
+----
+<1> `*[RUTA_REPOSITORIO]*` : Este script genera la estructura de directorios a partir del home del usuario y en la ultima carpeta de la ruta se inicializa el repositorio git
+====
+    .. Validamos nuestro `contenedor`, `usuario` y `home`
++
+====
+[source, bash, subs="+quotes"]
+----
+`[dummy@2689b195dc5a ~]$ pwd`
+`/home/dummy`
+----
+====
+    .. Clonamos el proyecto donde estan todas las utilerias
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~]$ git clone https://github.com/santux/fun-vcs-with-git.git*`
+`Cloning into 'fun-vcs-with-git'...`
+`remote: Enumerating objects: 72, done.`
+`remote: Counting objects: 100% (72/72), done.`
+`remote: Compressing objects: 100% (51/51), done.`
+`remote: Total 72 (delta 21), reused 62 (delta 15), pack-reused 0 (from 0)`
+`Receiving objects: 100% (72/72), 14.44 KiB | 7.22 MiB/s, done.`
+`Resolving deltas: 100% (21/21), done.`
+`*[dummy@2689b195dc5a ~]$ ll*``
+`total 0`
+`drwxr-xr-x. 1 dummy dummy 132 Jan 01 00:00 fun-vcs-with-git`
+----
+====
+    .. Creamos el repositorio usando el script: `*repository_generator.sh*`
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~]$ ./fun-vcs-with-git/scripts/repository_generator.sh demo-git-bisect*`
+`Creando directorio en: /home/dummy/demo-git-bisect`
+`Inicializando nuevo repositorio Git...`
+`Initialized empty Git repository in /home/dummy/demo-git-bisect/.git/`
+`[main (root-commit) 5da930c] Commit inicial`
+ `1 file changed, 1 insertion(+)`
+ `create mode 100644 README.adoc`
+`Listo. Tu nuevo repositorio se encuentra en: /home/dummy/demo-git-bisect`
+----
+====
+    .. Ingresamos al repositorio y validamos que todo funciones correctamente
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~]$ cd demo-git-bisect*`
+`*[dummy@2689b195dc5a ~]$ git log*`
+`commit 90685f227b4ea2e13a2dacd4a8e66fb84124fda4 (HEAD -> main)`
+`Author: Dummy Crash <dummy@crashtest.com.mx>`
+`Date:   Tue May 5 04:45:34 2026 +0000`
+
+    `Commit inicial`
+`*[dummy@2689b195dc5a ~]$ git status*`
+`On branch main`
+`nothing to commit, working tree clean`
+
+`[dummy@2689b195dc5a ~]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/hola_mundo.py .`
+`[dummy@2689b195dc5a ~]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/genera_commits_bisect.sh .`
+----
+====
