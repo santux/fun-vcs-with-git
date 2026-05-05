@@ -32,4 +32,4 @@ else
     git commit -m 'Commit inicial'
 fi
 
-echo "Listo. Te encuentras en: $(pwd)"
+echo "Listo. Tu nuevo repositorio se encuentra en: $(pwd)"
