@@ -24,60 +24,277 @@ Si estas familiarizadon con el algoritmo de busqueda binaria esta herramienta ha
 ====
 [source, bash, subs="+quotes"]
 ----
-`[dummy@2689b195dc5a ~]$ pwd`
-`/home/dummy`
+`*[dummy@2689b195dc5a ~]$ pwd*`
+/home/dummy
 ----
 ====
+
     .. Clonamos el proyecto donde estan todas las utilerias
 +
 ====
 [source, bash, subs="+quotes"]
 ----
 `*[dummy@2689b195dc5a ~]$ git clone https://github.com/santux/fun-vcs-with-git.git*`
-`Cloning into 'fun-vcs-with-git'...`
-`remote: Enumerating objects: 72, done.`
-`remote: Counting objects: 100% (72/72), done.`
-`remote: Compressing objects: 100% (51/51), done.`
-`remote: Total 72 (delta 21), reused 62 (delta 15), pack-reused 0 (from 0)`
-`Receiving objects: 100% (72/72), 14.44 KiB | 7.22 MiB/s, done.`
-`Resolving deltas: 100% (21/21), done.`
-`*[dummy@2689b195dc5a ~]$ ll*``
-`total 0`
-`drwxr-xr-x. 1 dummy dummy 132 Jan 01 00:00 fun-vcs-with-git`
+Cloning into 'fun-vcs-with-git'...
+remote: Enumerating objects: 72, done.
+remote: Counting objects: 100% (72/72), done.
+remote: Compressing objects: 100% (51/51), done.
+remote: Total 72 (delta 21), reused 62 (delta 15), pack-reused 0 (from 0)
+Receiving objects: 100% (72/72), 14.44 KiB | 7.22 MiB/s, done.
+Resolving deltas: 100% (21/21), done.
+`*[dummy@2689b195dc5a ~]$ ll*`
+total 0
+drwxr-xr-x. 1 dummy dummy 132 Jan 01 00:00 fun-vcs-with-git
 ----
 ====
+
     .. Creamos el repositorio usando el script: `*repository_generator.sh*`
 +
 ====
 [source, bash, subs="+quotes"]
 ----
 `*[dummy@2689b195dc5a ~]$ ./fun-vcs-with-git/scripts/repository_generator.sh demo-git-bisect*`
-`Creando directorio en: /home/dummy/demo-git-bisect`
-`Inicializando nuevo repositorio Git...`
-`Initialized empty Git repository in /home/dummy/demo-git-bisect/.git/`
-`[main (root-commit) 5da930c] Commit inicial`
- `1 file changed, 1 insertion(+)`
- `create mode 100644 README.adoc`
-`Listo. Tu nuevo repositorio se encuentra en: /home/dummy/demo-git-bisect`
+Creando directorio en: /home/dummy/demo-git-bisect
+Inicializando nuevo repositorio Git...
+Initialized empty Git repository in /home/dummy/demo-git-bisect/.git/
+[main (root-commit) 5da930c] Commit inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.adoc
+Listo. Tu nuevo repositorio se encuentra en: /home/dummy/demo-git-bisect
 ----
 ====
+
     .. Ingresamos al repositorio y validamos que todo funciones correctamente
 +
 ====
 [source, bash, subs="+quotes"]
 ----
 `*[dummy@2689b195dc5a ~]$ cd demo-git-bisect*`
-`*[dummy@2689b195dc5a ~]$ git log*`
-`commit 90685f227b4ea2e13a2dacd4a8e66fb84124fda4 (HEAD -> main)`
-`Author: Dummy Crash <dummy@crashtest.com.mx>`
-`Date:   Tue May 5 04:45:34 2026 +0000`
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git log*`
+commit 90685f227b4ea2e13a2dacd4a8e66fb84124fda4 (HEAD -> main)
+Author: Dummy Crash <dummy@crashtest.com.mx>
+Date:   Tue May 5 04:45:34 2026 +0000
 
-    `Commit inicial`
-`*[dummy@2689b195dc5a ~]$ git status*`
-`On branch main`
-`nothing to commit, working tree clean`
-
-`[dummy@2689b195dc5a ~]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/hola_mundo.py .`
-`[dummy@2689b195dc5a ~]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/genera_commits_bisect.sh .`
+    Commit inicial
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git status*`
+On branch main
+nothing to commit, working tree clean
 ----
+====
+
+. Ejecución del demo.
+
+    .. Agregamos el script generador de commits/inyector de bug y programa en python.
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/hola_mundo.py .*`
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ cp ../fun-vcs-with-git/resources/ejemplo-bisect/genera_commits_bisect.sh .*`
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git status*`
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+    genera_commits_bisect.sh
+    hola_mundo.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+----
+====
+
+.. Hacemos commit del ejemplo python funcionando
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ python hola_mundo.py*`
+Hola Mundo
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git add .*`
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git commit -m "Add programa python funcionando"*`
+[main bcb9e96] Add programa python funcionando
+ 2 files changed, 48 insertions(+)
+ create mode 100755 genera_commits_bisect.sh
+ create mode 100644 hola_mundo.py
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git log*`
+commit bcb9e96af3cd5eb078ca19d2bbee7a54eb1b2f21 (HEAD -> main)
+Author: Dummy Crash <dummy@crashtest.com.mx>
+Date:   Fri May 15 05:01:41 2026 +0000
+
+    Add programa python funcionando
+
+commit c9cd6c826a75fc1eb6ac5ac6f6a7e4dd9a0bacb3
+Author: Dummy Crash <dummy@crashtest.com.mx>
+Date:   Fri May 15 04:55:51 2026 +0000
+
+    Commit inicial
+----
+====
+
+
+.. Creamos `*n*` número de commits, aleatoriamente ingresamos un error en ese grupo de commits
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$  ./genera_commits_bisect.sh*`
+Introduce un número entero: 10
+El error se inyectará silenciosamente en la iteración: 5
+[main 5d9413f] Commit numero 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 demo.txt
+[main 9f5fd44] Commit numero 2
+ 1 file changed, 1 insertion(+)
+[main 464f21a] Commit numero 3
+ 1 file changed, 1 insertion(+)
+[main a47e4eb] Commit numero 4
+ 1 file changed, 1 insertion(+)
+[main f94cdf2] inyectando error
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+[main eb5ef07] Commit numero 6
+ 1 file changed, 1 insertion(+)
+[main 7f5e70b] Commit numero 7
+ 1 file changed, 1 insertion(+)
+[main ce213d5] Commit numero 8
+ 1 file changed, 1 insertion(+)
+[main 523b31e] Commit numero 9
+ 1 file changed, 1 insertion(+)
+[main 6d40715] Commit numero 10
+ 1 file changed, 1 insertion(+)
+Proceso terminado. Se crearon 10 commits y el error está en el historial.
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$  git log --oneline*`
+6d40715 (HEAD -> main) Commit numero 10
+523b31e Commit numero 9
+ce213d5 Commit numero 8
+7f5e70b Commit numero 7
+eb5ef07 Commit numero 6
+f94cdf2 inyectando error
+a47e4eb Commit numero 4
+464f21a Commit numero 3
+9f5fd44 Commit numero 2
+5d9413f Commit numero 1
+bcb9e96 Add programa python funcionando
+c9cd6c8 Commit inicial
+(END)
+----
+====
+
+    .. Validamos el programa Python nuevamente
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$  python hola_mundo.py*`
+Traceback (most recent call last):
+  File "/home/dummy/demo-git-bisect/hola_mundo.py", line 7, in <module>
+    main()
+    ~~~~^^
+  File "/home/dummy/demo-git-bisect/hola_mundo.py", line 2, in main
+    raise TypeError("Que alguien me ayude")
+TypeError: Que alguien me ayude
+----
+====
+
+    .. Iniciamos el proceso `*bisect*`
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect start*`
+status: waiting for both good and bad commits
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect bad*`
+status: waiting for good commit(s), bad commit known
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect good bcb9e96*`
+Bisecting: 4 revisions left to test after this (roughly 2 steps)
+[f94cdf276c681d453d245ef933656cb7807bfca6] inyectando error
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ python hola_mundo.py*`
+Traceback (most recent call last):
+  File "/home/dummy/demo-git-bisect/hola_mundo.py", line 7, in <module>
+    main()
+    ~~~~^^
+  File "/home/dummy/demo-git-bisect/hola_mundo.py", line 2, in main
+    raise TypeError("Que alguien me ayude")
+TypeError: Que alguien me ayude
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect bad*`
+Bisecting: 2 revisions left to test after this (roughly 1 step)
+[9f5fd44a55515053510a2c3c047e4a8159c52734] Commit numero 2
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ python hola_mundo.py*`
+Hola Mundo
+Este programa funciona correctamente!!!
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect good*`
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[a47e4ebda95c430137a246e575f665cd12d702a0] Commit numero 4
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ python hola_mundo.py*`
+Hola Mundo
+Este programa funciona correctamente!!!
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect good*`
+f94cdf276c681d453d245ef933656cb7807bfca6 is the first bad commit
+commit f94cdf276c681d453d245ef933656cb7807bfca6
+Author: Dummy Crash <dummy@crashtest.com.mx>
+Date:   Fri May 15 05:38:16 2026 +0000
+
+    inyectando error
+
+ demo.txt      | 1 +
+ hola_mundo.py | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git branch*`
+* (no branch, bisect started on main)
+  main
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect reset*
+Previous HEAD position was f94cdf2 inyectando error
+Switched to branch 'main'
+----
+====
+
+.. Utilerias adicionales
++
+====
+[source, bash, subs="+quotes"]
+----
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect log*`
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [6d407151ed678109420777e30eb6d73e854a82de] Commit numero 10
+git bisect bad 6d407151ed678109420777e30eb6d73e854a82de
+# good: [bcb9e96af3cd5eb078ca19d2bbee7a54eb1b2f21] Add programa python funcionando
+git bisect good bcb9e96af3cd5eb078ca19d2bbee7a54eb1b2f21
+# bad: [f94cdf276c681d453d245ef933656cb7807bfca6] inyectando error
+git bisect bad f94cdf276c681d453d245ef933656cb7807bfca6
+# good: [9f5fd44a55515053510a2c3c047e4a8159c52734] Commit numero 2
+git bisect good 9f5fd44a55515053510a2c3c047e4a8159c52734
+# good: [a47e4ebda95c430137a246e575f665cd12d702a0] Commit numero 4
+git bisect good a47e4ebda95c430137a246e575f665cd12d702a0
+# first bad commit: [f94cdf276c681d453d245ef933656cb7807bfca6] inyectando error
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect visualize --pretty=oneline*`
+f3a81c697a88a3b01ddef5943c69595a3f554bf8 Commit numero 6
+f7a7c49c710e60e9b3bc1e22d04c826e33cf141e (HEAD) inyectando error
+cb4ea542979fa0ba5655cf435bbb4896c714630f Commit numero 4
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect replay*`
+
+`*[dummy@2689b195dc5a ~/demo-git-bisect]$ git bisect replay =(git bisect log)*`       <1>
+Previous HEAD position was a47e4eb Commit numero 4
+Switched to branch 'main'
+status: waiting for both good and bad commits
+f94cdf276c681d453d245ef933656cb7807bfca6 is the first bad commit
+commit f94cdf276c681d453d245ef933656cb7807bfca6
+Author: Dummy Crash <dummy@crashtest.com.mx>
+Date:   Fri May 15 05:38:16 2026 +0000
+
+    inyectando error
+
+ demo.txt      | 1 +
+ hola_mundo.py | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+----
+<1> Esta version del comando solo funciona con `zsh`
 ====

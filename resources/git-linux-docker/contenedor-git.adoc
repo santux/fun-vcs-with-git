@@ -70,6 +70,7 @@ fedora-git-slim:43-latest                  061427ba181c        313MB         83.
 `user.email=dummy@crashtest.com.mx`
 `user.name=Dummy Crash`
 `init.defaultbranch=main`
+`core.editor=vim`
 `(END)`
 ----
 ====
