@@ -19,7 +19,8 @@ WORKDIR /home/dummy
 
 RUN git config --global user.email "dummy@crashtest.com.mx" && \
     git config --global user.name "Dummy Crash" && \
-    git config --global init.defaultBranch main
+    git config --global init.defaultBranch main && \
+    git config --global core.editor "vim"
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
     && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
